@@ -19,6 +19,7 @@ public class UserController {
     // 왜 조회인데 post임? 민간함 정보는 body로 보낸다.
     // 로그인만 예외로 select인데 post 사용
     // select * from user_tb where username=? and password=?
+    /*
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO requestDTO) {
 
@@ -39,7 +40,7 @@ public class UserController {
 
         return "redirect:/"; // 컨트롤러가 존재하면 무조건 redirect 외우기
     }
-
+    */
     @PostMapping("/join")
     public String join(UserRequest.JoinDTO requestDTO) {
         System.out.println(requestDTO);

@@ -3,8 +3,10 @@ package shop.mtcoding.blog.board;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import shop.mtcoding.blog._core.config.security.MyLoginUser;
 import shop.mtcoding.blog.user.User;
 
 import java.util.HashMap;
@@ -21,11 +23,7 @@ public class BoardController {
     // title=제목1&content=내용1
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
-        // 1. 인증 체크
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if(sessionUser == null){
-            return "redirect:/loginForm";
-        }
 
         // 2. 권한 체크
         Board board = boardRepository.findById(id);
@@ -114,8 +112,8 @@ public class BoardController {
 
 
     @GetMapping({"/", "/board"})
-    public String index(HttpServletRequest request) {
-
+    public String index(HttpServletRequest request, @AuthenticationPrincipal MyLoginUser myLoginUser) {
+        System.out.println("로그인 되었나? :" + myLoginUser.getUsername());
         List<Board> boardList = boardRepository.findAll();
         request.setAttribute("boardList", boardList);
 
