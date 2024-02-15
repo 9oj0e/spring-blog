@@ -45,24 +45,19 @@
         </div>
         <div class="list-group">
             <!-- 댓글아이템 -->
+            {{#board.replies}}
             <div class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">cos</div>
-                    <div>댓글 내용입니다</div>
+                    <div class="px-1 me-1 bg-primary text-white rounded">{{rUsername}}</div>
+                    <div>{{rComment}}</div>
                 </div>
+                {{#rOwner}}
                 <form action="/reply/1/delete" method="post">
                     <button class="btn">🗑</button>
                 </form>
+                {{/rOwner}}
             </div>
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">ssar</div>
-                    <div>댓글 내용입니다</div>
-                </div>
-                <form action="/reply/1/delete" method="post">
-                    <button class="btn">🗑</button>
-                </form>
+            {{/board.replies}}
             </div>
         </div>
     </div>
